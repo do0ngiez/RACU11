@@ -1,4 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
+
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddDbContext<RACU11Context>(options =>
+        options.UseSqlite(builder.Configuration.GetConnectionString("RACU11Context")));
+}
+
+builder.Services.AddDbContext<RACU11Context>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("RACU11Context")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
