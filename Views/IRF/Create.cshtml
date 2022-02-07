@@ -19,7 +19,22 @@
             </div>
             <div class="form-group">
                 <label asp-for="TypeOfIncident" class="control-label"></label>
-                <input asp-for="TypeOfIncident" class="form-control" />
+                <!-- <input asp-for="TypeOfIncident" class="form-control" /> -->
+                <select id="TypeOfIncident" name="TypeOfIncident" class="form-control">
+                    <option value=""></option>
+                    <option value="online libel">online libel</option>
+                    <option value="online threat">online threat</option>
+                    <option value="identity theft">identity theft</option>
+                    <option value="hacking">hacking</option>
+                    <option value="anti-photo & video voyeurism (RA 9995)">anti-photo & video voyeurism (RA 9995)</option>
+                    <option value="unjust vexation">unjust vexation</option>
+                    <option value="robbery extortion">robbery extortion</option>
+                    <option value="atm/credit card fraud">atm/credit card fraud</option>
+                    <option value="child pornography">child pornography</option>
+                    <option value="violence against women and children (VAWC, RA 9262)">violence against women and children (VAWC, RA 9262)</option>
+                    <option value="illegal access">illegal access</option>
+                    <option value="email spoofing">email spoofing</option>
+                </select>
                 <span asp-validation-for="TypeOfIncident" class="text-danger"></span>
             </div>
             <div class="form-group">

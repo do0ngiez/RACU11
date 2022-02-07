@@ -1,5 +1,8 @@
+using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using RACU11.ViewModels;
+using RACU11.Models;
 var builder = WebApplication.CreateBuilder(args);
 
 if (builder.Environment.IsDevelopment())
@@ -12,7 +15,15 @@ builder.Services.AddDbContext<RACU11Context>(options =>
     options.UseSqlite(builder.Configuration.GetConnectionString("RACU11Context")));
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+
+// configure Mapster
+TypeAdapterConfig<CreateIRF, IRF>
+    .NewConfig()
+    .NameMatchingStrategy(NameMatchingStrategy.ConvertSourceMemberName(name => name.Replace("IRF_", "")));//removes IRF_
+TypeAdapterConfig<CreateIRF, ReportingPerson>
+    .NewConfig()
+    .NameMatchingStrategy(NameMatchingStrategy.ConvertSourceMemberName(name => name.Replace("ReportingPerson_", "")));
 
 var app = builder.Build();
 
