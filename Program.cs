@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using RACU11.ViewModels;
 using RACU11.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 if (builder.Environment.IsDevelopment())
@@ -24,6 +25,15 @@ TypeAdapterConfig<CreateIRF, IRF>
 TypeAdapterConfig<CreateIRF, ReportingPerson>
     .NewConfig()
     .NameMatchingStrategy(NameMatchingStrategy.ConvertSourceMemberName(name => name.Replace("ReportingPerson_", "")));
+TypeAdapterConfig<CreateIRF, Suspect>
+    .NewConfig()
+    .NameMatchingStrategy(NameMatchingStrategy.ConvertSourceMemberName(name => name.Replace("Suspect_", "")));
+TypeAdapterConfig<CreateIRF, Children>
+    .NewConfig()
+    .NameMatchingStrategy(NameMatchingStrategy.ConvertSourceMemberName(name => name.Replace("Children_", "")));
+TypeAdapterConfig<CreateIRF, Victim>
+    .NewConfig()
+    .NameMatchingStrategy(NameMatchingStrategy.ConvertSourceMemberName(name => name.Replace("Victim_", "")));
 
 var app = builder.Build();
 

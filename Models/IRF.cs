@@ -25,4 +25,6 @@ public class IRF
     //
     public ReportingPerson ReportingPerson { get; set; }
     public Suspect Suspect { get; set; }
+    public Children Children { get; set; }
+    public Victim Victim { get; set; }
 }

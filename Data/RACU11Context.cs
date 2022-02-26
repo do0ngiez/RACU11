@@ -12,7 +12,9 @@ using RACU11.Models;
         {
         }
 
-        public DbSet<RACU11.Models.IRF> IRF { get; set; }
-        public DbSet<RACU11.Models.ReportingPerson> ReportingPeople { get; set; }
-        public DbSet<RACU11.Models.Suspect> Suspect { get; set; }
+        public DbSet<IRF> IRF { get; set; }
+        public DbSet<ReportingPerson> ReportingPeople { get; set; }
+        public DbSet<Suspect> Suspect { get; set; }
+        public DbSet<Children> Children { get; set; }
+        public DbSet<RACU11.Models.Victim> Victim { get; set; }
     }

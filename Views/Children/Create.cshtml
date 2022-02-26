@@ -1,0 +1,58 @@
+@model RACU11.Models.Children
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Children</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="GuardianName" class="control-label"></label>
+                <input asp-for="GuardianName" class="form-control" />
+                <span asp-validation-for="GuardianName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="GuardianAddress" class="control-label"></label>
+                <input asp-for="GuardianAddress" class="form-control" />
+                <span asp-validation-for="GuardianAddress" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HomePhone" class="control-label"></label>
+                <input asp-for="HomePhone" class="form-control" />
+                <span asp-validation-for="HomePhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MobilePhone" class="control-label"></label>
+                <input asp-for="MobilePhone" class="form-control" />
+                <span asp-validation-for="MobilePhone" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DiversionMechanism" class="control-label"></label>
+                <input asp-for="DiversionMechanism" class="form-control" />
+                <span asp-validation-for="DiversionMechanism" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="OtherFeatures" class="control-label"></label>
+                <input asp-for="OtherFeatures" class="form-control" />
+                <span asp-validation-for="OtherFeatures" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

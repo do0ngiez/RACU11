@@ -2,32 +2,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RACU11.Models;
-using RACU11.ViewModels;
-using System.Diagnostics;
 
 namespace RACU11.Controllers
 {
-    public class IRFController : Controller
+    public class SuspectsController : Controller
     {
         private readonly RACU11Context _context;
 
-        public IRFController(RACU11Context context)
+        public SuspectsController(RACU11Context context)
         {
             _context = context;
         }
 
-        // GET: IRF
+        // GET: Suspects
         public async Task<IActionResult> Index()
         {
-            return View(await _context.IRF.ToListAsync());
+            return View(await _context.Suspect.ToListAsync());
         }
 
-        // GET: IRF/Details/5
+        // GET: Suspects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,73 +32,39 @@ namespace RACU11.Controllers
                 return NotFound();
             }
 
-            var iRF = await _context.IRF
+            var suspect = await _context.Suspect
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (iRF == null)
+            if (suspect == null)
             {
                 return NotFound();
             }
 
-            return View(iRF);
+            return View(suspect);
         }
 
-        // GET: IRF/Create
+        // GET: Suspects/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult CreateIRF()
-        {
-            return View();
-        }
-
-        // POST: IRF/Create
+        // POST: Suspects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlotterEntryNumber,TypeOfIncident,ReportingTimeAndDateOfReport,ReportingTimeAndDateOfIncident,IsThereSuspect,IsThereMoreThanOneSuspect")] IRF iRF)
+        public async Task<IActionResult> Create([Bind("Id,FamilyName,FirstName,MiddleName,Qualifier,Nickname,Nationality,Sex,CivilStatus,DOB,Age,HomePhone,MobilePhone,CurrentAddress,CurrentVillage,CurrentBarangay,CurrentCity,CurrentProvince,OtherAddress,OtherVillage,OtherBarangay,OtherCity,OtherProvince,HighestEducation,Occupation,WorkAddress,RelationToVictim,EmailAddress,AfpPersonnelRank,UnitAssignment,GroupAffiliation,WasWithPreviousCase,StatusOfPreviousCase,Height,Weight,ColorOfEyes,DescriptionOfEyes,ColorOfHair,DescriptionOfHair,UnderInfluenceOfDrugs,UnderInfluenceOfLiquors,UnderInfluenceOfOthers")] Suspect suspect)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(iRF);
+                _context.Add(suspect);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(iRF);
+            return View(suspect);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateIRF(CreateIRF viewModel)
-        {
-            // need suspect, for children, victim
-            var irf = viewModel.Adapt<IRF>();
-            var reportingPerson = viewModel.Adapt<ReportingPerson>();
-            var suspect = viewModel.Adapt<Suspect>();
-            var children = viewModel.Adapt<Children>();
-            var victim = viewModel.Adapt<Victim>();
-            irf.ReportingPerson = reportingPerson;
-            irf.Suspect = suspect;
-            irf.Children = children;
-            irf.Victim = victim;
-
-            _context.IRF.Add(irf);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        // GET: IRF/Edit/5
+        // GET: Suspects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -109,22 +72,22 @@ namespace RACU11.Controllers
                 return NotFound();
             }
 
-            var iRF = await _context.IRF.FindAsync(id);
-            if (iRF == null)
+            var suspect = await _context.Suspect.FindAsync(id);
+            if (suspect == null)
             {
                 return NotFound();
             }
-            return View(iRF);
+            return View(suspect);
         }
 
-        // POST: IRF/Edit/5
+        // POST: Suspects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlotterEntryNumber,TypeOfIncident,ReportingTimeAndDateOfReport,ReportingTimeAndDateOfIncident,IsThereSuspect,IsThereMoreThanOneSuspect")] IRF iRF)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FamilyName,FirstName,MiddleName,Qualifier,Nickname,Nationality,Sex,CivilStatus,DOB,Age,HomePhone,MobilePhone,CurrentAddress,CurrentVillage,CurrentBarangay,CurrentCity,CurrentProvince,OtherAddress,OtherVillage,OtherBarangay,OtherCity,OtherProvince,HighestEducation,Occupation,WorkAddress,RelationToVictim,EmailAddress,AfpPersonnelRank,UnitAssignment,GroupAffiliation,WasWithPreviousCase,StatusOfPreviousCase,Height,Weight,ColorOfEyes,DescriptionOfEyes,ColorOfHair,DescriptionOfHair,UnderInfluenceOfDrugs,UnderInfluenceOfLiquors,UnderInfluenceOfOthers")] Suspect suspect)
         {
-            if (id != iRF.Id)
+            if (id != suspect.Id)
             {
                 return NotFound();
             }
@@ -133,12 +96,12 @@ namespace RACU11.Controllers
             {
                 try
                 {
-                    _context.Update(iRF);
+                    _context.Update(suspect);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!IRFExists(iRF.Id))
+                    if (!SuspectExists(suspect.Id))
                     {
                         return NotFound();
                     }
@@ -149,10 +112,10 @@ namespace RACU11.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(iRF);
+            return View(suspect);
         }
 
-        // GET: IRF/Delete/5
+        // GET: Suspects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -160,30 +123,30 @@ namespace RACU11.Controllers
                 return NotFound();
             }
 
-            var iRF = await _context.IRF
+            var suspect = await _context.Suspect
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (iRF == null)
+            if (suspect == null)
             {
                 return NotFound();
             }
 
-            return View(iRF);
+            return View(suspect);
         }
 
-        // POST: IRF/Delete/5
+        // POST: Suspects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var iRF = await _context.IRF.FindAsync(id);
-            _context.IRF.Remove(iRF);
+            var suspect = await _context.Suspect.FindAsync(id);
+            _context.Suspect.Remove(suspect);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool IRFExists(int id)
+        private bool SuspectExists(int id)
         {
-            return _context.IRF.Any(e => e.Id == id);
+            return _context.Suspect.Any(e => e.Id == id);
         }
     }
 }

@@ -1,0 +1,275 @@
+@model IEnumerable<RACU11.Models.Suspect>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FamilyName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MiddleName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Qualifier)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nickname)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nationality)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sex)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CivilStatus)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DOB)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Age)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HomePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MobilePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentVillage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentBarangay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CurrentProvince)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherVillage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherBarangay)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherCity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OtherProvince)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HighestEducation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Occupation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WorkAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RelationToVictim)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AfpPersonnelRank)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnitAssignment)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GroupAffiliation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.WasWithPreviousCase)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusOfPreviousCase)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Height)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Weight)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ColorOfEyes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionOfEyes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ColorOfHair)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionOfHair)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnderInfluenceOfDrugs)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnderInfluenceOfLiquors)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.UnderInfluenceOfOthers)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FamilyName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MiddleName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Qualifier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nickname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nationality)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CivilStatus)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DOB)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HomePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobilePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentVillage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentBarangay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CurrentProvince)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherVillage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherBarangay)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherCity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OtherProvince)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HighestEducation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Occupation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WorkAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RelationToVictim)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EmailAddress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AfpPersonnelRank)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnitAssignment)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.GroupAffiliation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.WasWithPreviousCase)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusOfPreviousCase)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Height)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Weight)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ColorOfEyes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionOfEyes)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ColorOfHair)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionOfHair)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnderInfluenceOfDrugs)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnderInfluenceOfLiquors)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UnderInfluenceOfOthers)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

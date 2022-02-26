@@ -2,32 +2,29 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Mapster;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RACU11.Models;
-using RACU11.ViewModels;
-using System.Diagnostics;
 
 namespace RACU11.Controllers
 {
-    public class IRFController : Controller
+    public class ChildrenController : Controller
     {
         private readonly RACU11Context _context;
 
-        public IRFController(RACU11Context context)
+        public ChildrenController(RACU11Context context)
         {
             _context = context;
         }
 
-        // GET: IRF
+        // GET: Children
         public async Task<IActionResult> Index()
         {
-            return View(await _context.IRF.ToListAsync());
+            return View(await _context.Children.ToListAsync());
         }
 
-        // GET: IRF/Details/5
+        // GET: Children/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -35,73 +32,39 @@ namespace RACU11.Controllers
                 return NotFound();
             }
 
-            var iRF = await _context.IRF
+            var children = await _context.Children
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (iRF == null)
+            if (children == null)
             {
                 return NotFound();
             }
 
-            return View(iRF);
+            return View(children);
         }
 
-        // GET: IRF/Create
+        // GET: Children/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        public IActionResult CreateIRF()
-        {
-            return View();
-        }
-
-        // POST: IRF/Create
+        // POST: Children/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,BlotterEntryNumber,TypeOfIncident,ReportingTimeAndDateOfReport,ReportingTimeAndDateOfIncident,IsThereSuspect,IsThereMoreThanOneSuspect")] IRF iRF)
+        public async Task<IActionResult> Create([Bind("Id,GuardianName,GuardianAddress,HomePhone,MobilePhone,DiversionMechanism,OtherFeatures")] Children children)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(iRF);
+                _context.Add(children);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(iRF);
+            return View(children);
         }
 
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateIRF(CreateIRF viewModel)
-        {
-            // need suspect, for children, victim
-            var irf = viewModel.Adapt<IRF>();
-            var reportingPerson = viewModel.Adapt<ReportingPerson>();
-            var suspect = viewModel.Adapt<Suspect>();
-            var children = viewModel.Adapt<Children>();
-            var victim = viewModel.Adapt<Victim>();
-            irf.ReportingPerson = reportingPerson;
-            irf.Suspect = suspect;
-            irf.Children = children;
-            irf.Victim = victim;
-
-            _context.IRF.Add(irf);
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
-                Debug.WriteLine(ex.Message);
-            }
-
-            return RedirectToAction("Index");
-        }
-
-        // GET: IRF/Edit/5
+        // GET: Children/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -109,22 +72,22 @@ namespace RACU11.Controllers
                 return NotFound();
             }
 
-            var iRF = await _context.IRF.FindAsync(id);
-            if (iRF == null)
+            var children = await _context.Children.FindAsync(id);
+            if (children == null)
             {
                 return NotFound();
             }
-            return View(iRF);
+            return View(children);
         }
 
-        // POST: IRF/Edit/5
+        // POST: Children/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,BlotterEntryNumber,TypeOfIncident,ReportingTimeAndDateOfReport,ReportingTimeAndDateOfIncident,IsThereSuspect,IsThereMoreThanOneSuspect")] IRF iRF)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,GuardianName,GuardianAddress,HomePhone,MobilePhone,DiversionMechanism,OtherFeatures")] Children children)
         {
-            if (id != iRF.Id)
+            if (id != children.Id)
             {
                 return NotFound();
             }
@@ -133,12 +96,12 @@ namespace RACU11.Controllers
             {
                 try
                 {
-                    _context.Update(iRF);
+                    _context.Update(children);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!IRFExists(iRF.Id))
+                    if (!ChildrenExists(children.Id))
                     {
                         return NotFound();
                     }
@@ -149,10 +112,10 @@ namespace RACU11.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(iRF);
+            return View(children);
         }
 
-        // GET: IRF/Delete/5
+        // GET: Children/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -160,30 +123,30 @@ namespace RACU11.Controllers
                 return NotFound();
             }
 
-            var iRF = await _context.IRF
+            var children = await _context.Children
                 .FirstOrDefaultAsync(m => m.Id == id);
-            if (iRF == null)
+            if (children == null)
             {
                 return NotFound();
             }
 
-            return View(iRF);
+            return View(children);
         }
 
-        // POST: IRF/Delete/5
+        // POST: Children/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var iRF = await _context.IRF.FindAsync(id);
-            _context.IRF.Remove(iRF);
+            var children = await _context.Children.FindAsync(id);
+            _context.Children.Remove(children);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool IRFExists(int id)
+        private bool ChildrenExists(int id)
         {
-            return _context.IRF.Any(e => e.Id == id);
+            return _context.Children.Any(e => e.Id == id);
         }
     }
 }
